@@ -1,0 +1,19 @@
+{
+  "name": "mqtt-simple",
+  "version": "1.0.0",
+  "description": "Simple MQTT Server for LoT or IoT use",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mqtt;",
+    "nodejs"
+  ],
+  "author": "Cydnirn",
+  "license": "MIT",
+  "dependencies": {
+    "aedes": "^0.49.0",
+    "net": "^1.0.2"
+  }
+}
