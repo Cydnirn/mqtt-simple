@@ -1,32 +1,25 @@
 const app = require("express")();
 const http = require("http");
-const mqtt = require("mqtt");
+const {client} = require("./mqclient");
+const {InsertESP, InsertPersistESP} = require("./module/handleClient");
 
 const server = http.createServer(app);
 server.listen(5000, () => {
-    console.log("Server running on Port 5000")
+    console.log("Server running on Port 5000");
 });
 
-//MQTT CONNECT LIST
-const client = mqtt.connect("mqtt://localhost:1883");
+const clawRoutes = require("./controllers/claw");
+const wheelRoutes = require("./controllers/wheel");
+const ledRoutes = require("./controllers/led");
 
-client.on("connect", () => {
-    console.log("Connected to broker");
-    client.subscribe("esp/command", (err) => {
-        try {
-            console.log("Subscribed to commands");
-        } catch (err) {
-            console.log(err)
-        }
-    });
-});
+const ESPid = ledRoutes.ClientEsp;
+InsertESP(client, ESPid);
 
-client.on("message", async (topic, message) => {
-    if (topic === "esp/command"){
-        let data = JSON.parse(message.toString());
-        let espId = data.espId;
+app.use("/claw", clawRoutes);
+app.use("/wheel", wheelRoutes);
+app.use("/led", ledRoutes.router);
 
-        console.log(`Received data from ESP with id ${espId}`);
-        client.publish(`esp/${espId}/response`, 100);
-    }
+app.get("/persist", async(req, res) => {
+    InsertPersistESP(client, ESPid);
+    res.status(200).send("Success");
 });

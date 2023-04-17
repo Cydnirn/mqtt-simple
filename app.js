@@ -16,11 +16,13 @@ aedes.on('client', (client) => {
     console.log('new client connected', client.id);
 });
 
+/*
 aedes.on('publish', (packet, client) => {
     if(client){
         console.log('Message from client', client.id, " with message ", packet);
     }
 });
+*/
 
 aedes.on('subscribe', (subs, clients) => {
     if(clients){
