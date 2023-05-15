@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { client } = require("../mqclient");
 const fs = require("fs")
-const ClientEsp = [];
+const {ClientEsp} = require("../module/Client");
 
 router.get("/load", async (req, res) => {
     const data = JSON.parse(fs.readFileSync(require.resolve("../client.json"), "utf-8"));
@@ -14,11 +14,6 @@ router.get("/load", async (req, res) => {
     else{
         res.status(200).send("Success");
     }
-});
-
-router.get("/list", async (req, res) => {
-    console.log(ClientEsp);
-    res.send(ClientEsp.join(", "));
 });
 
 router.get("/on", async (req, res) => {
@@ -39,7 +34,4 @@ router.get("/off", async (req, res) => {
     }
 });
 
-module.exports = {
-    router,
-    ClientEsp
-}
+module.exports = router
