@@ -8,6 +8,17 @@ server.listen(5000, () => {
     console.log("Server running on Port 5000");
 });
 
+app.use((req, res, cb) => {
+    res.header("Content-Type", "application/json");
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, ngrok-skip-browser"
+    );
+    cb();
+});
+
 const clawRoutes = require("./controllers/claw");
 const wheelRoutes = require("./controllers/wheel");
 const ledRoutes = require("./controllers/led");

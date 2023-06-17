@@ -12,8 +12,4 @@ client.on("connect", () => {
     });
 });
 
-setTimeout(() => {
-    client.publish("esp/init", '{"espId": "2555E3"}');
-}, 2000);
-
 module.exports = {client};

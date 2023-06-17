@@ -20,6 +20,7 @@ function VerifyClient(espId){
 function InsertESP(client, arr = []){
     client.on("message", async(topic, message) => {
         if(topic == "esp/init"){
+            console.log("IN ID");
             const data = JSON.parse(message.toString());
             const id = data.espId;
             console.log(id);
@@ -44,9 +45,8 @@ function GetClient(index = 0){
     return ClientEsp[index];
 }
 
-function CheckValidClient(req){
-    let id = req.query.id;
-    if(!id){
+function CheckValidClient(id){
+    if(!id || id){
         return id = GetClient();
     }
     else{

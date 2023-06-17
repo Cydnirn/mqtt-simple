@@ -3,14 +3,14 @@ const { client } = require("../mqclient");
 const { CheckValidClient } = require("../module/handleClient");
 
 function WheelProcess(req, res, operation){
-    let id = CheckValidClient(req);
+    let id = CheckValidClient(req.query.id);
     if (id === "ERROR") {
         res.status(400).send("Must give ESP id");
         return;
     }
     console.log(id);
     client.publish(`esp/${id}/response`, operation);
-    res.status(200).send("Success");
+    res.status(200).json({result:"Success"});
 }
 
 router.route("/up").get(async (req, res) => {
