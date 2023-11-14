@@ -11,10 +11,7 @@ function IntoClientList(espId){
 
 function VerifyClient(espId){
     const isExist = ClientEsp.find((id) => id === espId);
-    if(!isExist){
-        return false;
-    }
-    return true;
+    return !isExist
 }
 
 function InsertESP(client, arr = []){
@@ -47,7 +44,7 @@ function GetClient(index = 0){
 
 function CheckValidClient(id){
     if(!id || id){
-        return id = GetClient();
+        return GetClient();
     }
     else{
         const isExist = VerifyClient(id);
@@ -55,7 +52,7 @@ function CheckValidClient(id){
             return "ERROR";
         }
         console.log("Client exist");
-        return;
+        return null;
     }
 }
 

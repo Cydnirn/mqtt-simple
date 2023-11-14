@@ -1,0 +1,1 @@
+Run ```npm run start``` to start the Aedes mq server
