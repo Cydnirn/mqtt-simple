@@ -1,5 +1,5 @@
 const mqtt = require("mqtt");
-const client = mqtt.connect("mqtt://localhost:1883");
+const client = mqtt.connect("mqtt://10.10.18.176:1883");
 
 client.on("connect", () => {
     console.log("Connected to broker");
@@ -7,9 +7,9 @@ client.on("connect", () => {
         try {
             console.log("Subscribed to Init");
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
     });
 });
 
-module.exports = {client};
+module.exports = { client };

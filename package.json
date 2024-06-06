@@ -5,8 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "npx esbuild app.js --bundle --minify --outdir=bundle --packages=external --format=cjs --platform=node",
+    "pkg": "pkg --compress GZip --public --targets node18-linux-x64,node18-win-x64 bundle/app.js -o bin/mqtt-siot",
     "start": "node app.js",
-    "devback":"nodemon back.js --ignore 'client.json'"
+    "devback": "nodemon mqclient.js --ignore 'client.json'",
+    "build": "npm run package && npm run pkg"
   },
   "keywords": [
     "mqtt;",
@@ -22,6 +25,8 @@
     "net": "^1.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "esbuild": "^0.21.4",
+    "nodemon": "^2.0.22",
+    "pkg": "^5.8.1"
   }
 }
